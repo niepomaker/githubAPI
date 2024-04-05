@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Service
 public class GitHubService {
-    private static final String GITHUB_API_URL = "https://api.github.com/users/";
+    private static final String GITHUB_API_URL = "https://api.github.com";
     private final CloseableHttpClient httpClient;
     private final ObjectMapper objectMapper;
 
@@ -24,7 +24,7 @@ public class GitHubService {
     }
 
     public Optional<JsonNode> getRepositories(String username, String header) throws IOException {
-        String url = GITHUB_API_URL + username + "/repos";
+        String url = GITHUB_API_URL + "/users/" + username + "/repos";
         HttpGet request = new HttpGet(url);
         //Using GH TOKEN to increase the rate limit when using the REST API for my own purposes.
         request.setHeader("Authorization", "token {{GH_TOKEN}}");
